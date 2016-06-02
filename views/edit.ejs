@@ -1,0 +1,24 @@
+<% layout('layout') -%>
+<h1><%= title %></h1>
+<div id="list">
+  <form action="/create" method="post" accept-charset="utf-8">
+    <div class="item-new">
+      <input type="text" name="content">
+    </div>
+  </form>
+  
+  <% todos.forEach(function(todo){ %>
+    <% if(todo._id == current) { %>
+      <div class="item-new">
+        <form action="/update/<%= todo._id%>" method="post" accept-charset="utf-8">
+          <input type="text" name="content" value="<%= todo.content%>">
+        </form>
+        <a href="/destroy/<%= todo._id %>">delete</a>
+    <% } else { %>
+      <div class="item">
+        <a href="/edit/<%= todo._id %>"><%= todo.content %></a>
+        <a href="/destroy/<%= todo._id %>">delete</a>
+    <% } %>
+    </div>
+  <% });%>
+</div>
